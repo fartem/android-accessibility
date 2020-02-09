@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/AppTheme.ToolBar"/>
+
+    <TextView
+        android:id="@+id/login_error_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_l"
+        android:textAppearance="@style/ErrorText"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/login_email_address"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_l"
+        android:layout_marginLeft="@dimen/padding_l"
+        android:layout_marginStart="@dimen/padding_l"
+        android:layout_marginRight="@dimen/padding_l"
+        android:layout_marginEnd="@dimen/padding_l"
+        app:layout_constraintTop_toBottomOf="@id/login_error_message"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:errorTextAppearance="@style/ErrorText"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/login_email_address"
+            android:inputType="textEmailAddress"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/login_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_l"
+        android:layout_marginStart="@dimen/padding_l"
+        android:layout_marginRight="@dimen/padding_l"
+        android:layout_marginEnd="@dimen/padding_l"
+        app:layout_constraintTop_toBottomOf="@id/login_email_address"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:errorTextAppearance="@style/ErrorText"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="@string/login_password"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/login_remember_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_l"
+        app:layout_constraintTop_toBottomOf="@+id/login_password"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/login_remember_email_address"
+        app:layout_constraintLeft_toRightOf="@+id/login_remember_checkbox"
+        app:layout_constraintTop_toBottomOf="@+id/login_password"
+        app:layout_constraintBottom_toTopOf="@+id/login_login_button"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/login_login_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_l"
+        android:layout_marginStart="@dimen/padding_l"
+        android:layout_marginRight="@dimen/padding_l"
+        android:layout_marginEnd="@dimen/padding_l"
+        app:layout_constraintTop_toBottomOf="@+id/login_remember_checkbox"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/login_login"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/login_forgot_password_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_l"
+        android:layout_marginStart="@dimen/padding_l"
+        android:layout_marginRight="@dimen/padding_l"
+        android:layout_marginEnd="@dimen/padding_l"
+        app:layout_constraintTop_toBottomOf="@+id/login_login_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:text="@string/login_forgot_password"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
