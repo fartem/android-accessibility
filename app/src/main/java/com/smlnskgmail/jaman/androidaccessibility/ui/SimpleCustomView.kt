@@ -11,8 +11,8 @@ import com.smlnskgmail.jaman.androidaccessibility.utils.AccessibilityUtils
 
 class SimpleCustomView : View {
 
-    private val TEXT_SIZE: Float = AccessibilityUtils.spToPx(48f)
-    private val TEXT = "Custom view!"
+    private val textSize: Float = AccessibilityUtils.spToPx(48f)
+    private val text = "Custom view!"
 
     private var textPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private var bounds: Rect = Rect()
@@ -26,19 +26,28 @@ class SimpleCustomView : View {
     )
 
     init {
-
-        textPaint.textSize = TEXT_SIZE
-        textPaint.getTextBounds(TEXT, 0, TEXT.length, bounds)
+        textPaint.textSize = textSize
+        textPaint.getTextBounds(
+            text,
+            0,
+            text.length,
+            bounds
+        )
         bounds.offset(0, -bounds.top)
 
         textPaint.color = Color.BLACK
-        textPaint.textSize = TEXT_SIZE
+        textPaint.textSize = textSize
         importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
     }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        canvas!!.drawText(TEXT, 0f, bounds.bottom.toFloat(), textPaint)
+        canvas!!.drawText(
+            text,
+            0f,
+            bounds.bottom.toFloat(),
+            textPaint
+        )
     }
 
 }

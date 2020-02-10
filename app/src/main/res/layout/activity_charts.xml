@@ -8,7 +8,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:theme="@style/AppTheme.ToolBar"/>
+        android:theme="@style/AppTheme.ToolBar" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -25,29 +25,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/padding_l"
-                android:text="@string/charts_line_chart_heading"/>
+                android:text="@string/charts_line_chart_heading" />
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/charts_line_chart"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"/>
+                android:layout_height="300dp" />
 
             <View
                 style="@style/AppTheme.Divider"
                 android:layout_marginTop="@dimen/padding_l"
-                android:layout_marginBottom="@dimen/padding_l"/>
+                android:layout_marginBottom="@dimen/padding_l" />
 
             <TextView
                 android:id="@+id/charts_bar_chart_heading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/padding_l"
-                android:text="@string/charts_bar_chart_heading"/>
+                android:text="@string/charts_bar_chart_heading" />
 
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/charts_bar_chart"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"/>
+                android:layout_height="300dp" />
 
         </LinearLayout>
 

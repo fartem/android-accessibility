@@ -4,14 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import com.smlnskgmail.jaman.androidaccessibility.R
+import kotlinx.android.synthetic.main.activity_settings.*
 
 class SettingsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val spinner: Spinner = findViewById(R.id.settings_spinner)
         val adapter = ArrayAdapter.createFromResource(
             this,
             R.array.settings_spinner_array,
@@ -20,7 +19,7 @@ class SettingsActivity : BaseActivity() {
         adapter.setDropDownViewResource(
             android.R.layout.simple_spinner_dropdown_item
         )
-        spinner.adapter = adapter
+        settings_spinner.adapter = adapter
     }
 
     override fun getLayoutResId(): Int {

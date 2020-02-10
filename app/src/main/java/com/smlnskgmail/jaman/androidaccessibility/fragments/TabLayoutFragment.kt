@@ -3,20 +3,29 @@ package com.smlnskgmail.jaman.androidaccessibility.fragments
 import android.os.Bundle
 import android.text.Html
 import android.text.method.ScrollingMovementMethod
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
-import com.smlnskgmail.jaman.androidaccessibility.R
+import kotlinx.android.synthetic.main.fragment_tab_layout.view.*
 
 class TabLayoutFragment : Fragment() {
 
+    override fun onCreate(@Nullable savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val args = arguments
+        if (args != null) {
+            text = arguments!!.getString(TEXT_KEY)
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        view.tab_layout_textview.text = Html.fromHtml(text)
+        view.tab_layout_textview.movementMethod = ScrollingMovementMethod()
+    }
+
     companion object {
 
-        private val TEXT_KEY = "text_key"
+        private const val TEXT_KEY = "text_key"
         private var text: String? = null
 
         fun newInstance(text: String?): TabLayoutFragment {
@@ -27,25 +36,6 @@ class TabLayoutFragment : Fragment() {
             return fragment
         }
 
-    }
-
-    override fun onCreate(@Nullable savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val args = arguments
-        if (args != null) {
-            text = arguments!!.getString(TEXT_KEY)
-        }
-    }
-
-    override fun onCreateView(
-        @NonNull inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? { // Inflate the layout for this fragment
-        val v: View = inflater.inflate(R.layout.fragment_tab_layout, container, false)
-        val textView = v.findViewById<TextView>(R.id.tab_layout_textview)
-        textView.text = Html.fromHtml(text)
-        textView.movementMethod = ScrollingMovementMethod()
-        return v
     }
 
 }

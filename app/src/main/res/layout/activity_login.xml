@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -10,7 +11,8 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:theme="@style/AppTheme.ToolBar"/>
+        android:theme="@style/AppTheme.ToolBar"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/login_error_message"
@@ -18,7 +20,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_l"
         android:textAppearance="@style/ErrorText"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"/>
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/login_email_address"
@@ -39,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/login_email_address"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -61,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:hint="@string/login_password"/>
+            android:hint="@string/login_password" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/padding_l"
         app:layout_constraintTop_toBottomOf="@+id/login_password"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -80,7 +82,7 @@
         android:text="@string/login_remember_email_address"
         app:layout_constraintLeft_toRightOf="@+id/login_remember_checkbox"
         app:layout_constraintTop_toBottomOf="@+id/login_password"
-        app:layout_constraintBottom_toTopOf="@+id/login_login_button"/>
+        app:layout_constraintBottom_toTopOf="@+id/login_login_button" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/login_login_button"
@@ -93,10 +95,11 @@
         app:layout_constraintTop_toBottomOf="@+id/login_remember_checkbox"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="@string/login_login"/>
+        android:text="@string/login_login" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/login_forgot_password_button"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/padding_l"
@@ -106,7 +109,6 @@
         app:layout_constraintTop_toBottomOf="@+id/login_login_button"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:text="@string/login_forgot_password"/>
+        android:text="@string/login_forgot_password" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

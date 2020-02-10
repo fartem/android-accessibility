@@ -5,9 +5,9 @@
 
     <TextView
         android:id="@+id/simple_list_item_textview"
+        style="@style/TextAppearance.AppCompat.Menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextAppearance.AppCompat.Menu"
-        android:padding="@dimen/padding_l"/>
+        android:padding="@dimen/padding_l" />
 
 </FrameLayout>

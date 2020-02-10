@@ -5,22 +5,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.smlnskgmail.jaman.androidaccessibility.R
 import com.smlnskgmail.jaman.androidaccessibility.adapters.ListAdapter
+import kotlinx.android.synthetic.main.fragment_list.*
 import java.util.*
 
 class ListFragment : BaseFragment(), ListAdapter.ItemClickListener {
 
-    companion object {
-
-        fun newInstance(): ListFragment {
-            return ListFragment()
-        }
-
-    }
-
-    var mCallback: ItemClickListener? = null
+    var callback: ItemClickListener? = null
 
     interface ItemClickListener {
         fun onListItemClicked(view: View?, position: Int)
@@ -28,45 +20,51 @@ class ListFragment : BaseFragment(), ListAdapter.ItemClickListener {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        mCallback = try {
+        callback = try {
             context as ItemClickListener
         } catch (e: ClassCastException) {
             throw ClassCastException(
-                context.toString()
-                        + " must implement OnHeadlineSelectedListener"
+                "$context must implement OnHeadlineSelectedListener"
             )
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // populate some data
         val listItems: MutableList<String> = ArrayList()
         for (i in 0..19) {
             listItems.add("Option $i")
         }
-        // set up adapter
         val adapter = ListAdapter(listItems)
         adapter.clickListener = this
-        // set up recyclerview
-        val recyclerView: RecyclerView = view.findViewById(R.id.single_list_recyclerview)
-        recyclerView.setHasFixedSize(true)
+
+        single_list_recyclerview.setHasFixedSize(true)
+
         val layoutManager = LinearLayoutManager(context)
-        recyclerView.setLayoutManager(layoutManager)
-        recyclerView.setAdapter(adapter)
+        single_list_recyclerview.layoutManager = layoutManager
+        single_list_recyclerview.adapter = adapter
+
         val dividerItemDecoration = DividerItemDecoration(
-            recyclerView.getContext(),
-            layoutManager.getOrientation()
+            single_list_recyclerview.context,
+            layoutManager.orientation
         )
-        recyclerView.addItemDecoration(dividerItemDecoration)
+        single_list_recyclerview.addItemDecoration(dividerItemDecoration)
     }
 
     override fun onItemClicked(view: View?, position: Int) {
-        mCallback!!.onListItemClicked(view, position)
+        callback!!.onListItemClicked(view, position)
     }
 
     override fun getLayoutResId(): Int {
         return R.layout.fragment_list
+    }
+
+    companion object {
+
+        fun newInstance(): ListFragment {
+            return ListFragment()
+        }
+
     }
 
 }

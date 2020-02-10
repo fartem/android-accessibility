@@ -9,7 +9,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:theme="@style/AppTheme.ToolBar"/>
+        android:theme="@style/AppTheme.ToolBar" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -27,14 +27,14 @@
                 android:padding="@dimen/padding_l"
                 android:button="@null"
                 android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
-                android:text="@string/settings_checkbox_label"/>
+                android:text="@string/settings_checkbox_label" />
 
             <Switch
                 android:id="@+id/settings_switch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_l"
-                android:text="@string/settings_switch_label"/>
+                android:text="@string/settings_switch_label" />
 
             <RadioGroup
                 android:id="@+id/settings_radiogroup"
@@ -80,13 +80,13 @@
                     android:id="@+id/settings_spinner_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Spinner"/>
+                    android:text="Spinner" />
 
                 <Spinner
                     android:id="@+id/settings_spinner"
                     android:layout_width="fill_parent"
                     android:layout_height="@dimen/min_touch_size"
-                    tools:listitem="@android:layout/simple_spinner_item"/>
+                    tools:listitem="@android:layout/simple_spinner_item" />
 
             </LinearLayout>
 
@@ -100,12 +100,12 @@
                     android:id="@+id/settings_seekbar_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Seek bar:"/>
+                    android:text="Seek bar:" />
 
                 <SeekBar
                     android:id="@+id/settings_seekbar"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/min_touch_size"/>
+                    android:layout_height="@dimen/min_touch_size" />
 
             </LinearLayout>
 

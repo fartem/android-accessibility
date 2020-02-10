@@ -2,7 +2,6 @@ package com.smlnskgmail.jaman.androidaccessibility.activities
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import com.smlnskgmail.jaman.androidaccessibility.R
 
 class CustomViewActivity : BaseActivity() {

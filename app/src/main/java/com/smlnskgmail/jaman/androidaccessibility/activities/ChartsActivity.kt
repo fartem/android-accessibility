@@ -16,7 +16,9 @@ import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.EntryXComparator
 import com.smlnskgmail.jaman.androidaccessibility.R
 import com.smlnskgmail.jaman.androidaccessibility.utils.AccessibilityUtils
+import kotlinx.android.synthetic.main.activity_charts.*
 import java.util.*
+import kotlin.math.roundToInt
 
 class ChartsActivity : BaseActivity() {
 
@@ -26,14 +28,25 @@ class ChartsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val lineChart: LineChart = findViewById(R.id.charts_line_chart)
-        val barChart: BarChart = findViewById(R.id.charts_bar_chart)
         val xValueFormatter = valueFormatterForMonth
-        configureChart(lineChart, xValueFormatter)
-        configureChart(barChart, xValueFormatter)
+        configureChart(
+            charts_line_chart,
+            xValueFormatter
+        )
+        configureChart(
+            charts_bar_chart,
+            xValueFormatter
+        )
+
         val data = getRandomFloats(6, 500f)
-        setDataForChart(lineChart, data)
-        setDataForChart(barChart, data)
+        setDataForChart(
+            charts_line_chart,
+            data
+        )
+        setDataForChart(
+            charts_bar_chart,
+            data
+        )
     }
 
     companion object {
@@ -43,9 +56,9 @@ class ChartsActivity : BaseActivity() {
         }
 
         private val valueFormatterForMonth: IAxisValueFormatter
-            get() = IAxisValueFormatter { value, axis ->
+            get() = IAxisValueFormatter { value, _ ->
                 val calendar = Calendar.getInstance()
-                calendar[Calendar.MONTH] = Math.round(value) % 12
+                calendar[Calendar.MONTH] = value.roundToInt() % 12
                 calendar.getDisplayName(
                     Calendar.MONTH,
                     Calendar.SHORT,
@@ -53,12 +66,15 @@ class ChartsActivity : BaseActivity() {
                 )
             }
 
-        private fun getRandomFloats(count: Int, maxValue: Float): FloatArray {
+        private fun getRandomFloats(
+            count: Int,
+            maxValue: Float
+        ): FloatArray {
             val floats = FloatArray(count)
             for (i in 0 until count) {
-                val mult = maxValue + 1
+                val mul = maxValue + 1
                 floats[i] =
-                    Math.round(Math.random() * mult).toFloat()
+                    (Math.random() * mul).roundToInt().toFloat()
             }
             return floats
         }
@@ -69,13 +85,17 @@ class ChartsActivity : BaseActivity() {
         ) {
             chart.setScaleEnabled(false)
             chart.setDrawGridBackground(false)
+
             val xAxis = chart.xAxis
             xAxis.position = XAxis.XAxisPosition.BOTTOM
             xAxis.valueFormatter = xAxisValueFormatter
+
             val leftAxis = chart.axisLeft
             leftAxis.isEnabled = false
+
             val rightAxis = chart.axisRight
             rightAxis.isEnabled = false
+
             val legend = chart.legend
             legend.isEnabled = false
         }
@@ -85,32 +105,51 @@ class ChartsActivity : BaseActivity() {
             @NonNull data: FloatArray
         ) { // Line Data
             if (chart is LineChart) {
-                val lineEntries: MutableList<Entry> =
-                    ArrayList()
+                val lineEntries = mutableListOf<Entry>()
                 for (i in data.indices) {
-                    lineEntries.add(Entry(i.toFloat(), data[i]))
+                    lineEntries.add(
+                        Entry(
+                            i.toFloat(),
+                            data[i]
+                        )
+                    )
                 }
-                Collections.sort(lineEntries, EntryXComparator())
+                Collections.sort(
+                    lineEntries,
+                    EntryXComparator()
+                )
                 val lineDataSet = LineDataSet(lineEntries, "DataSet")
                 lineDataSet.setColors(*ColorTemplate.MATERIAL_COLORS)
-                val lineDataSets =
-                    ArrayList<ILineDataSet>()
+
+                val lineDataSets = mutableListOf<ILineDataSet>()
                 lineDataSets.add(lineDataSet)
+
                 val lineData = LineData(lineDataSets)
-                lineData.setValueTextSize(AccessibilityUtils.getScaleIndependentPixels(13f))
+                lineData.setValueTextSize(
+                    AccessibilityUtils.getScaleIndependentPixels(13f)
+                )
                 chart.data = lineData
             } else if (chart is BarChart) {
-                val barEntries: MutableList<BarEntry> = ArrayList()
+                val barEntries = mutableListOf<BarEntry>()
                 for (i in data.indices) {
-                    barEntries.add(BarEntry(i.toFloat(), data[i]))
+                    barEntries.add(
+                        BarEntry(
+                            i.toFloat(),
+                            data[i]
+                        )
+                    )
                 }
+
                 val barDataSet = BarDataSet(barEntries, "DataSet")
                 barDataSet.setColors(*ColorTemplate.MATERIAL_COLORS)
-                val barDataSets =
-                    ArrayList<IBarDataSet>()
+
+                val barDataSets = mutableListOf<IBarDataSet>()
                 barDataSets.add(barDataSet)
+
                 val barData = BarData(barDataSets)
-                barData.setValueTextSize(AccessibilityUtils.getScaleIndependentPixels(13f))
+                barData.setValueTextSize(
+                    AccessibilityUtils.getScaleIndependentPixels(13f)
+                )
                 chart.data = barData
             }
         }

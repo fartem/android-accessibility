@@ -3,26 +3,24 @@ package com.smlnskgmail.jaman.androidaccessibility.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.viewpager.widget.ViewPager
-import com.google.android.material.tabs.TabLayout
 import com.smlnskgmail.jaman.androidaccessibility.R
 import com.smlnskgmail.jaman.androidaccessibility.adapters.TabLayoutPagerAdapter
+import kotlinx.android.synthetic.main.activity_tab_layout.*
 
 class TabLayoutActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val tabLayout: TabLayout = findViewById(R.id.tab_layout_tabs) as TabLayout
-        val viewPager: ViewPager = findViewById(R.id.tab_layout_view_pager) as ViewPager
-        val res = resources
-        val mViewPagerAdapter = TabLayoutPagerAdapter(
-            supportFragmentManager, res.getStringArray(R.array.tab_layout_tabs_content)
+        val viewPagerAdapter = TabLayoutPagerAdapter(
+            supportFragmentManager,
+            resources.getStringArray(R.array.tab_layout_tabs_content)
         )
-        viewPager.setAdapter(mViewPagerAdapter)
-        tabLayout.setupWithViewPager(viewPager)
-        val tabNames = res.getStringArray(R.array.tab_layout_tabs)
-        for (i in 0 until tabLayout.getTabCount()) {
-            val tab = tabLayout.getTabAt(i)
+        tab_layout_view_pager.adapter = viewPagerAdapter
+        tab_layout_tabs.setupWithViewPager(tab_layout_view_pager)
+
+        val tabNames = resources.getStringArray(R.array.tab_layout_tabs)
+        for (i in 0 until tab_layout_tabs.tabCount) {
+            val tab = tab_layout_tabs.getTabAt(i)
             if (tab != null && tabNames[i] != null) {
                 tab.text = tabNames[i]
             }

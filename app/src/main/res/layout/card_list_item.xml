@@ -28,7 +28,7 @@
             android:layout_width="@dimen/avatar_image"
             android:layout_height="@dimen/avatar_image"
             android:background="@android:color/holo_blue_dark"
-            tools:srcCompat="@drawable/ic_launcher_foreground"/>
+            tools:srcCompat="@drawable/ic_launcher_foreground" />
 
         <TextView
             android:id="@+id/cards_card_name"
@@ -41,7 +41,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/cards_card_timeloc"
             android:textSize="22sp"
-            tools:text="John Doe"/>
+            tools:text="John Doe" />
 
         <TextView
             android:id="@+id/cards_card_timeloc"
@@ -52,7 +52,7 @@
             app:layout_constraintBottom_toBottomOf="@id/cards_card_avatar"
             app:layout_constraintLeft_toRightOf="@id/cards_card_avatar"
             android:textSize="12sp"
-            tools:text="13 hrs • Location, Country"/>
+            tools:text="13 hrs • Location, Country" />
 
         <ImageButton
             android:id="@+id/cards_card_more_options"
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintRight_toRightOf="parent"
             app:srcCompat="@drawable/ic_more_vert_24dp"
-            android:background="?android:attr/selectableItemBackground"/>
+            android:background="?android:attr/selectableItemBackground" />
 
         <TextView
             android:id="@+id/cards_card_share_text"
@@ -70,7 +70,7 @@
             app:layout_constraintTop_toBottomOf="@id/cards_card_avatar"
             android:ellipsize="end"
             android:maxLines="3"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo lacus enim, vel ultricies nisl iaculis eget. Sed vulputate velit quam, vitae aliquam magna iaculis a. Pellentesque ut nunc dui. Vivamus non dapibus justo, quis maximus dui."/>
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo lacus enim, vel ultricies nisl iaculis eget. Sed vulputate velit quam, vitae aliquam magna iaculis a. Pellentesque ut nunc dui. Vivamus non dapibus justo, quis maximus dui." />
 
         <ImageView
             android:id="@+id/cards_card_image"
@@ -79,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginTop="@dimen/padding_m"
-            app:layout_constraintTop_toBottomOf="@id/cards_card_share_text"/>
+            app:layout_constraintTop_toBottomOf="@id/cards_card_share_text" />
 
         <ImageButton
             android:id="@+id/cards_card_like"
@@ -89,7 +89,7 @@
             android:layout_height="@dimen/min_touch_size"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/cards_card_comment"
-            app:layout_constraintTop_toBottomOf="@id/cards_card_image"/>
+            app:layout_constraintTop_toBottomOf="@id/cards_card_image" />
 
         <ImageButton
             android:id="@+id/cards_card_comment"
@@ -99,7 +99,7 @@
             android:layout_height="@dimen/min_touch_size"
             app:layout_constraintLeft_toRightOf="@+id/cards_card_like"
             app:layout_constraintRight_toLeftOf="@+id/cards_card_favorite"
-            app:layout_constraintTop_toBottomOf="@id/cards_card_image"/>
+            app:layout_constraintTop_toBottomOf="@id/cards_card_image" />
 
         <ImageButton
             android:id="@+id/cards_card_favorite"
@@ -109,7 +109,7 @@
             android:layout_height="@dimen/min_touch_size"
             app:layout_constraintLeft_toRightOf="@+id/cards_card_comment"
             app:layout_constraintRight_toLeftOf="@+id/cards_card_share"
-            app:layout_constraintTop_toBottomOf="@id/cards_card_image"/>
+            app:layout_constraintTop_toBottomOf="@id/cards_card_image" />
 
         <ImageButton
             android:id="@+id/cards_card_share"
@@ -119,7 +119,7 @@
             android:layout_height="@dimen/min_touch_size"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@id/cards_card_favorite"
-            app:layout_constraintTop_toBottomOf="@id/cards_card_image"/>
+            app:layout_constraintTop_toBottomOf="@id/cards_card_image" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

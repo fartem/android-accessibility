@@ -5,7 +5,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.smlnskgmail.jaman.androidaccessibility.fragments.TabLayoutFragment
 
-class TabLayoutPagerAdapter(fm: FragmentManager?, private val mData: Array<String>) : FragmentStatePagerAdapter(fm!!) {
+class TabLayoutPagerAdapter(
+    fragmentManager: FragmentManager?,
+    private val mData: Array<String>
+) : FragmentStatePagerAdapter(fragmentManager!!) {
 
     override fun getItem(position: Int): Fragment {
         return TabLayoutFragment.newInstance(mData[position])
@@ -16,8 +19,9 @@ class TabLayoutPagerAdapter(fm: FragmentManager?, private val mData: Array<Strin
     }
 
     companion object {
-        const val count = 3
-    }
 
+        const val count = 3
+
+    }
 
 }

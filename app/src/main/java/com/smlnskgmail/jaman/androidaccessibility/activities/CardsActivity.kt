@@ -18,10 +18,10 @@ import com.smlnskgmail.jaman.androidaccessibility.R
 import com.smlnskgmail.jaman.androidaccessibility.adapters.CardListAdapter
 import com.smlnskgmail.jaman.androidaccessibility.models.CardItem
 import com.smlnskgmail.jaman.androidaccessibility.utils.CommonUtils
+import kotlinx.android.synthetic.main.activity_cards.*
 
 class CardsActivity : BaseActivity(), CardListAdapter.ItemClickListeners {
 
-    private var recyclerView: RecyclerView? = null
     private var cardsListAdapter: CardListAdapter? = null
     private var cardsListLayoutManager: RecyclerView.LayoutManager? = null
 
@@ -29,11 +29,10 @@ class CardsActivity : BaseActivity(), CardListAdapter.ItemClickListeners {
         super.onCreate(savedInstanceState)
         cardsListAdapter = CardListAdapter(cardsList())
         cardsListAdapter!!.setClickListener(this)
-        recyclerView = findViewById(R.id.cards_recyclerview)
-        recyclerView!!.setHasFixedSize(true)
+        cards_recyclerview.setHasFixedSize(true)
         cardsListLayoutManager = LinearLayoutManager(this)
-        recyclerView!!.layoutManager = cardsListLayoutManager
-        recyclerView!!.adapter = cardsListAdapter
+        cards_recyclerview.layoutManager = cardsListLayoutManager
+        cards_recyclerview.adapter = cardsListAdapter
         setUpItemTouchHelper()
     }
 
@@ -98,7 +97,12 @@ class CardsActivity : BaseActivity(), CardListAdapter.ItemClickListeners {
         shareIntent.type = "text/plain"
         shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
         val chooserTitle = resources.getString(R.string.cards_share_via)
-        startActivity(Intent.createChooser(shareIntent, chooserTitle))
+        startActivity(
+            Intent.createChooser(
+                shareIntent,
+                chooserTitle
+            )
+        )
     }
 
     override fun onMoreOptionsClicked(view: View?, position: Int) {
@@ -139,9 +143,12 @@ class CardsActivity : BaseActivity(), CardListAdapter.ItemClickListeners {
                     return false
                 }
 
-                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
-                    val position: Int = viewHolder.getAdapterPosition()
-                    val adapter: CardListAdapter = recyclerView!!.getAdapter() as CardListAdapter
+                override fun onSwiped(
+                    viewHolder: RecyclerView.ViewHolder,
+                    swipeDir: Int
+                ) {
+                    val position: Int = viewHolder.adapterPosition
+                    val adapter: CardListAdapter = cards_recyclerview.adapter as CardListAdapter
                     adapter.removeItem(position)
                 }
 
@@ -193,7 +200,7 @@ class CardsActivity : BaseActivity(), CardListAdapter.ItemClickListeners {
         val itemTouchHelper = ItemTouchHelper(
             simpleItemTouchCallback
         )
-        itemTouchHelper.attachToRecyclerView(recyclerView)
+        itemTouchHelper.attachToRecyclerView(cards_recyclerview)
     }
 
     override fun getLayoutResId(): Int {

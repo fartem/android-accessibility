@@ -1,7 +1,6 @@
 package com.smlnskgmail.jaman.androidaccessibility.activities
 
 import android.os.Bundle
-import android.widget.Button
 import com.smlnskgmail.jaman.androidaccessibility.R
 import kotlinx.android.synthetic.main.activity_main.*
 

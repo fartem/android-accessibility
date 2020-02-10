@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Learning Android Accessibility</string>
+    <string name="app_name">Android Accessibility</string>
 
     <!-- Login -->
     <string name="login_title">Login</string>

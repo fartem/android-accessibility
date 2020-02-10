@@ -8,6 +8,6 @@
         style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/single_detail_fragment_text"/>
+        android:text="@string/single_detail_fragment_text" />
 
 </FrameLayout>
