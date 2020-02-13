@@ -17,6 +17,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         if (!hasEmptyFields()) {
             login_error_message!!.text = getString(R.string.login_invalid)
+            login_email_address.error = null
+            login_password.error = null
         }
     }
 

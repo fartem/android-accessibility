@@ -35,7 +35,6 @@
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/padding_m"
             android:layout_marginStart="@dimen/padding_m"
             app:layout_constraintLeft_toRightOf="@id/cards_card_avatar"
             app:layout_constraintTop_toTopOf="parent"
@@ -58,9 +57,12 @@
             android:id="@+id/cards_card_more_options"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minWidth="@dimen/min_touch_size"
+            android:minHeight="@dimen/min_touch_size"
+            android:paddingStart="@dimen/min_touch_size"
+            android:background="?android:attr/selectableItemBackground"
             app:layout_constraintRight_toRightOf="parent"
-            app:srcCompat="@drawable/ic_more_vert_24dp"
-            android:background="?android:attr/selectableItemBackground" />
+            app:srcCompat="@drawable/ic_more_vert_24dp" />
 
         <TextView
             android:id="@+id/cards_card_share_text"
@@ -83,40 +85,48 @@
 
         <ImageButton
             android:id="@+id/cards_card_like"
-            app:srcCompat="@drawable/ic_thumb_up_border_24dp"
-            android:background="?android:attr/selectableItemBackground"
             android:layout_width="0dp"
             android:layout_height="@dimen/min_touch_size"
+            android:minWidth="@dimen/min_touch_size"
+            android:minHeight="@dimen/min_touch_size"
+            app:srcCompat="@drawable/ic_thumb_up_border_24dp"
+            android:background="?android:attr/selectableItemBackground"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/cards_card_comment"
             app:layout_constraintTop_toBottomOf="@id/cards_card_image" />
 
         <ImageButton
             android:id="@+id/cards_card_comment"
-            app:srcCompat="@drawable/ic_comment_24dp"
-            android:background="?android:attr/selectableItemBackground"
             android:layout_width="0dp"
             android:layout_height="@dimen/min_touch_size"
+            android:minWidth="@dimen/min_touch_size"
+            android:minHeight="@dimen/min_touch_size"
+            app:srcCompat="@drawable/ic_comment_24dp"
+            android:background="?android:attr/selectableItemBackground"
             app:layout_constraintLeft_toRightOf="@+id/cards_card_like"
             app:layout_constraintRight_toLeftOf="@+id/cards_card_favorite"
             app:layout_constraintTop_toBottomOf="@id/cards_card_image" />
 
         <ImageButton
             android:id="@+id/cards_card_favorite"
-            app:srcCompat="@drawable/ic_favorite_border_24dp"
-            android:background="?android:attr/selectableItemBackground"
             android:layout_width="0dp"
             android:layout_height="@dimen/min_touch_size"
+            android:minWidth="@dimen/min_touch_size"
+            android:minHeight="@dimen/min_touch_size"
+            app:srcCompat="@drawable/ic_favorite_border_24dp"
+            android:background="?android:attr/selectableItemBackground"
             app:layout_constraintLeft_toRightOf="@+id/cards_card_comment"
             app:layout_constraintRight_toLeftOf="@+id/cards_card_share"
             app:layout_constraintTop_toBottomOf="@id/cards_card_image" />
 
         <ImageButton
             android:id="@+id/cards_card_share"
-            app:srcCompat="@drawable/ic_share_24dp"
-            android:background="?android:attr/selectableItemBackground"
             android:layout_width="0dp"
             android:layout_height="@dimen/min_touch_size"
+            android:minWidth="@dimen/min_touch_size"
+            android:minHeight="@dimen/min_touch_size"
+            app:srcCompat="@drawable/ic_share_24dp"
+            android:background="?android:attr/selectableItemBackground"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@id/cards_card_favorite"
             app:layout_constraintTop_toBottomOf="@id/cards_card_image" />

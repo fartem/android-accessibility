@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.smlnskgmail.jaman.androidaccessibility.R
 import com.smlnskgmail.jaman.androidaccessibility.models.CardItem
@@ -98,13 +99,37 @@ class CardListAdapter(
             itemView.cards_card_image.setImageResource(item.imageId)
             if (item.isLiked) {
                 itemView.cards_card_like.setColorFilter(Color.BLUE)
+                itemView.cards_card_like.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        itemView.context,
+                        R.drawable.ic_thumb_up_24dp
+                    )
+                )
             } else {
                 itemView.cards_card_like.colorFilter = null
+                itemView.cards_card_like.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        itemView.context,
+                        R.drawable.ic_thumb_up_border_24dp
+                    )
+                )
             }
             if (item.isFavorite) {
                 itemView.cards_card_favorite.setColorFilter(Color.RED)
+                itemView.cards_card_favorite.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        itemView.context,
+                        R.drawable.ic_favorite_24dp
+                    )
+                )
             } else {
                 itemView.cards_card_favorite.colorFilter = null
+                itemView.cards_card_favorite.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        itemView.context,
+                        R.drawable.ic_favorite_border_24dp
+                    )
+                )
             }
         }
 
