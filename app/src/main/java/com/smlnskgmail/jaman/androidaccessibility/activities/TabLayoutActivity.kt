@@ -13,7 +13,9 @@ class TabLayoutActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         val viewPagerAdapter = TabLayoutPagerAdapter(
             supportFragmentManager,
-            resources.getStringArray(R.array.tab_layout_tabs_content)
+            resources.getStringArray(
+                R.array.tab_layout_tabs_content
+            )
         )
         tab_layout_view_pager.adapter = viewPagerAdapter
         tab_layout_tabs.setupWithViewPager(tab_layout_view_pager)
@@ -23,6 +25,11 @@ class TabLayoutActivity : BaseActivity() {
             val tab = tab_layout_tabs.getTabAt(i)
             if (tab != null && tabNames[i] != null) {
                 tab.text = tabNames[i]
+
+                val contentDescription = getString(
+                    R.string.tab_layout_content_description
+                ).format(i + 1, tab_layout_tabs.tabCount)
+                tab.contentDescription = tabNames[i] + ", " + contentDescription
             }
         }
     }

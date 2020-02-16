@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.ViewCompat
 import com.smlnskgmail.jaman.androidaccessibility.R
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -12,6 +13,11 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         login_login_button.setOnClickListener(this)
+
+        ViewCompat.setAccessibilityLiveRegion(
+            login_error_message,
+            ViewCompat.ACCESSIBILITY_LIVE_REGION_POLITE
+        )
     }
 
     override fun onClick(v: View) {

@@ -7,6 +7,7 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.View
+import android.view.accessibility.AccessibilityNodeInfo
 import com.smlnskgmail.jaman.androidaccessibility.utils.AccessibilityUtils
 
 class SimpleCustomView : View {
@@ -17,9 +18,20 @@ class SimpleCustomView : View {
     private var textPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private var bounds: Rect = Rect()
 
-    constructor(context: Context?) : super(context)
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
+    constructor(
+        context: Context?
+    ) : super(context)
+
+    constructor(
+        context: Context?,
+        attrs: AttributeSet?
+    ) : super(context, attrs)
+
+    constructor(
+        context: Context?,
+        attrs: AttributeSet?,
+        defStyleAttr: Int
+    ) : super(
         context,
         attrs,
         defStyleAttr
@@ -38,6 +50,13 @@ class SimpleCustomView : View {
         textPaint.color = Color.BLACK
         textPaint.textSize = textSize
         importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
+    }
+
+    override fun onInitializeAccessibilityNodeInfo(
+        info: AccessibilityNodeInfo?
+    ) {
+        super.onInitializeAccessibilityNodeInfo(info)
+        info!!.text = text
     }
 
     override fun onDraw(canvas: Canvas?) {

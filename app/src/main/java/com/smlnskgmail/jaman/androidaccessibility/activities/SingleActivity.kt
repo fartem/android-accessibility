@@ -4,18 +4,24 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.Fragment
 import com.smlnskgmail.jaman.androidaccessibility.R
 import com.smlnskgmail.jaman.androidaccessibility.fragments.DetailFragment
 import com.smlnskgmail.jaman.androidaccessibility.fragments.ListFragment
 
-class SingleActivity : BaseActivity(), ListFragment.ItemClickListener {
+class SingleActivity
+    : BaseActivity(), ListFragment.ItemClickListener, DetailFragment.AnimationListener {
+
+    private lateinit var listFragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportFragmentManager.beginTransaction()
+        listFragment = ListFragment.newInstance()
+        supportFragmentManager
+            .beginTransaction()
             .add(
                 R.id.single_fragment_container,
-                ListFragment.newInstance()
+                listFragment
             )
             .commit()
     }
@@ -32,6 +38,13 @@ class SingleActivity : BaseActivity(), ListFragment.ItemClickListener {
                 DetailFragment.newInstance()
             )
             .addToBackStack(null)
+            .commit()
+    }
+
+    override fun onAnimationEnd() {
+        supportFragmentManager
+            .beginTransaction()
+            .hide(listFragment)
             .commit()
     }
 

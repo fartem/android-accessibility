@@ -19,6 +19,10 @@ class CardListAdapter(
 
     private var clickListeners: ItemClickListeners? = null
 
+    init {
+        setHasStableIds(true)
+    }
+
     @NonNull
     override fun onCreateViewHolder(
         @NonNull parent: ViewGroup,
@@ -56,6 +60,10 @@ class CardListAdapter(
         return cardData.size
     }
 
+    override fun getItemId(position: Int): Long {
+        return cardData[position].avatarId.toLong()
+    }
+
     interface ItemClickListeners {
 
         fun onLikeClicked(view: View?, position: Int)
@@ -83,6 +91,21 @@ class CardListAdapter(
             itemView.cards_card_avatar.setImageResource(item.avatarId)
             itemView.cards_card_name.text = item.name
 
+            val name = item.name
+
+            itemView.cards_card_more_options.contentDescription = contentDescriptionForName(
+                R.string.cards_card_more_options_button,
+                name
+            )
+            itemView.cards_card_comment.contentDescription = contentDescriptionForName(
+                R.string.cards_card_comment_button,
+                name
+            )
+            itemView.cards_card_share.contentDescription = contentDescriptionForName(
+                R.string.cards_card_share_button,
+                name
+            )
+
             val `when` = item.date.time
             val now = Calendar.getInstance().timeInMillis
             val time = DateUtils.getRelativeTimeSpanString(
@@ -105,6 +128,10 @@ class CardListAdapter(
                         R.drawable.ic_thumb_up_24dp
                     )
                 )
+                itemView.cards_card_like.contentDescription = contentDescriptionForName(
+                    R.string.cards_card_unlike_button,
+                    name
+                )
             } else {
                 itemView.cards_card_like.colorFilter = null
                 itemView.cards_card_like.setImageDrawable(
@@ -112,6 +139,10 @@ class CardListAdapter(
                         itemView.context,
                         R.drawable.ic_thumb_up_border_24dp
                     )
+                )
+                itemView.cards_card_like.contentDescription = contentDescriptionForName(
+                    R.string.cards_card_like_button,
+                    name
                 )
             }
             if (item.isFavorite) {
@@ -122,6 +153,10 @@ class CardListAdapter(
                         R.drawable.ic_favorite_24dp
                     )
                 )
+                itemView.cards_card_favorite.contentDescription = contentDescriptionForName(
+                    R.string.cards_card_unfavorite_button,
+                    name
+                )
             } else {
                 itemView.cards_card_favorite.colorFilter = null
                 itemView.cards_card_favorite.setImageDrawable(
@@ -130,7 +165,20 @@ class CardListAdapter(
                         R.drawable.ic_favorite_border_24dp
                     )
                 )
+                itemView.cards_card_favorite.contentDescription = contentDescriptionForName(
+                    R.string.cards_card_favorite_button,
+                    name
+                )
             }
+        }
+
+        private fun contentDescriptionForName(
+            descriptionResId: Int,
+            name: String
+        ): String {
+            return itemView.context.getString(
+                descriptionResId
+            ).format(name)
         }
 
         override fun onClick(view: View) {

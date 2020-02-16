@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
+import androidx.core.view.accessibility.AccessibilityEventCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,6 +34,7 @@ class CardsActivity : BaseActivity(), CardListAdapter.ItemClickListeners {
         cardsListLayoutManager = LinearLayoutManager(this)
         cards_recyclerview.layoutManager = cardsListLayoutManager
         cards_recyclerview.adapter = cardsListAdapter
+        cards_recyclerview.itemAnimator = null
         setUpItemTouchHelper()
     }
 
@@ -75,6 +77,9 @@ class CardsActivity : BaseActivity(), CardListAdapter.ItemClickListeners {
         val item: CardItem = cardsListAdapter!!.getItem(position)
         item.isLiked = !item.isLiked
         cardsListAdapter!!.notifyDataSetChanged()
+        view!!.sendAccessibilityEvent(
+            AccessibilityEventCompat.TYPE_VIEW_ACCESSIBILITY_FOCUSED
+        )
     }
 
     override fun onCommentClicked(view: View?, position: Int) {
@@ -89,6 +94,9 @@ class CardsActivity : BaseActivity(), CardListAdapter.ItemClickListeners {
         val item: CardItem = cardsListAdapter!!.getItem(position)
         item.isFavorite = !item.isFavorite
         cardsListAdapter!!.notifyDataSetChanged()
+        view!!.sendAccessibilityEvent(
+            AccessibilityEventCompat.TYPE_VIEW_ACCESSIBILITY_FOCUSED
+        )
     }
 
     override fun onShareClicked(view: View?, position: Int) {

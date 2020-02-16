@@ -7,15 +7,15 @@ import com.smlnskgmail.jaman.androidaccessibility.fragments.TabLayoutFragment
 
 class TabLayoutPagerAdapter(
     fragmentManager: FragmentManager?,
-    private val mData: Array<String>
+    private val data: Array<String>
 ) : FragmentStatePagerAdapter(fragmentManager!!) {
 
     override fun getItem(position: Int): Fragment {
-        return TabLayoutFragment.newInstance(mData[position])
+        return TabLayoutFragment.newInstance(data[position])
     }
 
     override fun getCount(): Int {
-        return mData.size
+        return data.size
     }
 
     companion object {

@@ -33,6 +33,7 @@
 
     <!-- TabLayout Activity -->
     <string name="tab_layout_title">Tab Layout</string>
+    <string name="tab_layout_content_description">Tab, %1$d of %2$d</string>
     <string-array name="tab_layout_tabs">
         <item>About</item>
         <item>Mistakes</item>
@@ -80,6 +81,13 @@
     <string name="cards_card_archive_this_post">Archive this post</string>
     <string name="cards_card_remove_this_post">Remove this post</string>
     <string name="cards_card_report_this_post">Report this post</string>
+    <string name="cards_card_more_options_button">More options for %1$s\' post</string>
+    <string name="cards_card_like_button">Like %1$s\' post</string>
+    <string name="cards_card_unlike_button">Unlike %1$s\' post</string>
+    <string name="cards_card_comment_button">Comment %1$s\' post</string>
+    <string name="cards_card_favorite_button">Favorite %1$s\' post</string>
+    <string name="cards_card_unfavorite_button">Unfavorite %1$s\' post</string>
+    <string name="cards_card_share_button">Share %1$s\' post</string>
 
     <!-- Custom View -->
     <string name="custom_view_title">Custom view</string>
