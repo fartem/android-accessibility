@@ -3,7 +3,10 @@ package com.smlnskgmail.jaman.androidaccessibility.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.View
 import androidx.annotation.NonNull
+import androidx.core.view.ViewCompat
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.BarLineChartBase
 import com.github.mikephil.charting.charts.LineChart
@@ -11,20 +14,25 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
+import com.github.mikephil.charting.interfaces.datasets.IBarLineScatterCandleBubbleDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.EntryXComparator
 import com.smlnskgmail.jaman.androidaccessibility.R
+import com.smlnskgmail.jaman.androidaccessibility.accessibility.ChartAccessibilityHelper
 import com.smlnskgmail.jaman.androidaccessibility.utils.AccessibilityUtils
 import kotlinx.android.synthetic.main.activity_charts.*
 import java.util.*
+import kotlin.math.round
 import kotlin.math.roundToInt
 
-class ChartsActivity : BaseActivity() {
+class ChartsActivity : BaseActivity(), ChartAccessibilityHelper.DataFormatter {
 
-    override fun getLayoutResId(): Int {
-        return R.layout.activity_charts
-    }
+    private val lineEntries = mutableListOf<Entry>()
+    private val barEntries = mutableListOf<BarEntry>()
+
+    private lateinit var lineChartHelper: ChartAccessibilityHelper
+    private lateinit var barChartHelper: ChartAccessibilityHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +55,110 @@ class ChartsActivity : BaseActivity() {
             charts_bar_chart,
             data
         )
+
+        lineChartHelper = ChartAccessibilityHelper(
+            charts_line_chart,
+            lineEntries
+        )
+        lineChartHelper.dataFormatter(this)
+        ViewCompat.setAccessibilityDelegate(
+            charts_line_chart,
+            lineChartHelper
+        )
+
+        barChartHelper = ChartAccessibilityHelper(
+            charts_bar_chart,
+            barEntries
+        )
+        barChartHelper.dataFormatter(this)
+        ViewCompat.setAccessibilityDelegate(
+            charts_bar_chart,
+            barChartHelper
+        )
+
+        charts_line_chart.setOnHoverListener { _, event ->
+            lineChartHelper.dispatchHoverEvent(event!!)
+        }
+        charts_bar_chart.setOnHoverListener { _, event ->
+            barChartHelper.dispatchHoverEvent(event!!)
+        }
+    }
+
+    private fun setDataForChart(
+        @NonNull chart: BarLineChartBase<*>,
+        @NonNull data: FloatArray
+    ) {
+        if (chart is LineChart) {
+            for (i in data.indices) {
+                lineEntries.add(
+                    Entry(
+                        i.toFloat(),
+                        data[i]
+                    )
+                )
+            }
+            Collections.sort(
+                lineEntries,
+                EntryXComparator()
+            )
+            val lineDataSet = LineDataSet(lineEntries, "DataSet")
+            lineDataSet.setColors(*ColorTemplate.MATERIAL_COLORS)
+
+            val lineDataSets = mutableListOf<ILineDataSet>()
+            lineDataSets.add(lineDataSet)
+
+            val lineData = LineData(lineDataSets)
+            lineData.setValueTextSize(
+                AccessibilityUtils.getScaleIndependentPixels(13f)
+            )
+            chart.data = lineData
+        } else if (chart is BarChart) {
+            for (i in data.indices) {
+                barEntries.add(
+                    BarEntry(
+                        i.toFloat(),
+                        data[i]
+                    )
+                )
+            }
+
+            val barDataSet = BarDataSet(barEntries, "DataSet")
+            barDataSet.setColors(*ColorTemplate.MATERIAL_COLORS)
+
+            val barDataSets = mutableListOf<IBarDataSet>()
+            barDataSets.add(barDataSet)
+
+            val barData = BarData(barDataSets)
+            barData.setValueTextSize(
+                AccessibilityUtils.getScaleIndependentPixels(13f)
+            )
+            chart.data = barData
+        }
+    }
+
+    override fun description(
+        chart: BarLineChartBase<
+                out BarLineScatterCandleBubbleData<
+                        out IBarLineScatterCandleBubbleDataSet<out Entry>
+                        >
+                >,
+        entries: List<Entry>,
+        entry: Entry
+    ): String {
+        val xValue = chart.xAxis.getFormattedLabel(
+            entries.indexOf(entry)
+        )
+        val yValue = entry.y.roundToInt()
+        return resources.getQuantityString(
+            R.plurals.charts_plurals_data_description,
+            yValue,
+            xValue,
+            yValue
+        )
+    }
+
+    override fun getLayoutResId(): Int {
+        return R.layout.activity_charts
     }
 
     companion object {
@@ -98,60 +210,6 @@ class ChartsActivity : BaseActivity() {
 
             val legend = chart.legend
             legend.isEnabled = false
-        }
-
-        private fun setDataForChart(
-            @NonNull chart: BarLineChartBase<*>,
-            @NonNull data: FloatArray
-        ) { // Line Data
-            if (chart is LineChart) {
-                val lineEntries = mutableListOf<Entry>()
-                for (i in data.indices) {
-                    lineEntries.add(
-                        Entry(
-                            i.toFloat(),
-                            data[i]
-                        )
-                    )
-                }
-                Collections.sort(
-                    lineEntries,
-                    EntryXComparator()
-                )
-                val lineDataSet = LineDataSet(lineEntries, "DataSet")
-                lineDataSet.setColors(*ColorTemplate.MATERIAL_COLORS)
-
-                val lineDataSets = mutableListOf<ILineDataSet>()
-                lineDataSets.add(lineDataSet)
-
-                val lineData = LineData(lineDataSets)
-                lineData.setValueTextSize(
-                    AccessibilityUtils.getScaleIndependentPixels(13f)
-                )
-                chart.data = lineData
-            } else if (chart is BarChart) {
-                val barEntries = mutableListOf<BarEntry>()
-                for (i in data.indices) {
-                    barEntries.add(
-                        BarEntry(
-                            i.toFloat(),
-                            data[i]
-                        )
-                    )
-                }
-
-                val barDataSet = BarDataSet(barEntries, "DataSet")
-                barDataSet.setColors(*ColorTemplate.MATERIAL_COLORS)
-
-                val barDataSets = mutableListOf<IBarDataSet>()
-                barDataSets.add(barDataSet)
-
-                val barData = BarData(barDataSets)
-                barData.setValueTextSize(
-                    AccessibilityUtils.getScaleIndependentPixels(13f)
-                )
-                chart.data = barData
-            }
         }
 
     }

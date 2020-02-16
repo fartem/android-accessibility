@@ -1,12 +1,16 @@
 package com.smlnskgmail.jaman.androidaccessibility.adapters
 
 import android.graphics.Color
+import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat
+import androidx.core.view.AccessibilityDelegateCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.smlnskgmail.jaman.androidaccessibility.R
 import com.smlnskgmail.jaman.androidaccessibility.models.CardItem
@@ -84,6 +88,21 @@ class CardListAdapter(
             itemView.cards_card_favorite.setOnClickListener(this)
             itemView.cards_card_share.setOnClickListener(this)
             itemView.cards_card_more_options.setOnClickListener(this)
+
+//            disableAccessibilityFor(itemView.cards_card_like)
+//            disableAccessibilityFor(itemView.cards_card_comment)
+//            disableAccessibilityFor(itemView.cards_card_favorite)
+//            disableAccessibilityFor(itemView.cards_card_share)
+//            disableAccessibilityFor(itemView.cards_card_more_options)
+        }
+
+        @Suppress("unused")
+        private fun disableAccessibilityFor(view: View) {
+            ViewCompat.setImportantForAccessibility(
+                view,
+                ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_NO
+            )
+            view.contentDescription = null
         }
 
         fun bind(position: Int) {
@@ -97,14 +116,18 @@ class CardListAdapter(
                 R.string.cards_card_more_options_button,
                 name
             )
-            itemView.cards_card_comment.contentDescription = contentDescriptionForName(
+
+            val commentDescription = contentDescriptionForName(
                 R.string.cards_card_comment_button,
                 name
             )
-            itemView.cards_card_share.contentDescription = contentDescriptionForName(
+            itemView.cards_card_comment.contentDescription = commentDescription
+
+            val shareDescription = contentDescriptionForName(
                 R.string.cards_card_share_button,
                 name
             )
+            itemView.cards_card_share.contentDescription = shareDescription
 
             val `when` = item.date.time
             val now = Calendar.getInstance().timeInMillis
@@ -120,6 +143,8 @@ class CardListAdapter(
             )
             itemView.cards_card_share_text.text = item.shareText
             itemView.cards_card_image.setImageResource(item.imageId)
+
+            val likeDescription: String
             if (item.isLiked) {
                 itemView.cards_card_like.setColorFilter(Color.BLUE)
                 itemView.cards_card_like.setImageDrawable(
@@ -128,7 +153,7 @@ class CardListAdapter(
                         R.drawable.ic_thumb_up_24dp
                     )
                 )
-                itemView.cards_card_like.contentDescription = contentDescriptionForName(
+                likeDescription = contentDescriptionForName(
                     R.string.cards_card_unlike_button,
                     name
                 )
@@ -140,11 +165,14 @@ class CardListAdapter(
                         R.drawable.ic_thumb_up_border_24dp
                     )
                 )
-                itemView.cards_card_like.contentDescription = contentDescriptionForName(
+                likeDescription = contentDescriptionForName(
                     R.string.cards_card_like_button,
                     name
                 )
             }
+            itemView.cards_card_like.contentDescription = likeDescription
+
+            val favoriteDescription: String
             if (item.isFavorite) {
                 itemView.cards_card_favorite.setColorFilter(Color.RED)
                 itemView.cards_card_favorite.setImageDrawable(
@@ -153,7 +181,7 @@ class CardListAdapter(
                         R.drawable.ic_favorite_24dp
                     )
                 )
-                itemView.cards_card_favorite.contentDescription = contentDescriptionForName(
+                favoriteDescription = contentDescriptionForName(
                     R.string.cards_card_unfavorite_button,
                     name
                 )
@@ -165,11 +193,112 @@ class CardListAdapter(
                         R.drawable.ic_favorite_border_24dp
                     )
                 )
-                itemView.cards_card_favorite.contentDescription = contentDescriptionForName(
+                favoriteDescription = contentDescriptionForName(
                     R.string.cards_card_favorite_button,
                     name
                 )
             }
+            itemView.cards_card_favorite.contentDescription = favoriteDescription
+
+//            ViewCompat.setAccessibilityDelegate(
+//                itemView,
+//                object : AccessibilityDelegateCompat() {
+//                    override fun onInitializeAccessibilityNodeInfo(
+//                        host: View?,
+//                        info: AccessibilityNodeInfoCompat?
+//                    ) {
+//                        super.onInitializeAccessibilityNodeInfo(host, info)
+//
+//                        info!!.addAction(
+//                            AccessibilityNodeInfoCompat.AccessibilityActionCompat(
+//                                AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_CLICK.id,
+//                                "View full post"
+//                            )
+//                        )
+//
+//                        info.addAction(
+//                            AccessibilityNodeInfoCompat.AccessibilityActionCompat(
+//                                R.id.action_card_like,
+//                                likeDescription
+//                            )
+//                        )
+//                        info.addAction(
+//                            AccessibilityNodeInfoCompat.AccessibilityActionCompat(
+//                                R.id.action_card_comment,
+//                                commentDescription
+//                            )
+//                        )
+//                        info.addAction(
+//                            AccessibilityNodeInfoCompat.AccessibilityActionCompat(
+//                                R.id.action_card_favorite,
+//                                favoriteDescription
+//                            )
+//                        )
+//                        info.addAction(
+//                            AccessibilityNodeInfoCompat.AccessibilityActionCompat(
+//                                R.id.action_card_share,
+//                                shareDescription
+//                            )
+//                        )
+//                        info.addAction(
+//                            AccessibilityNodeInfoCompat.AccessibilityActionCompat(
+//                                R.id.action_card_archive,
+//                                itemView.context.getString(
+//                                    R.string.cards_card_archive_this_post
+//                                )
+//                            )
+//                        )
+//                        info.addAction(
+//                            AccessibilityNodeInfoCompat.AccessibilityActionCompat(
+//                                R.id.action_card_remove,
+//                                itemView.context.getString(
+//                                    R.string.cards_card_remove_this_post
+//                                )
+//                            )
+//                        )
+//                        info.addAction(
+//                            AccessibilityNodeInfoCompat.AccessibilityActionCompat(
+//                                R.id.action_card_report,
+//                                itemView.context.getString(
+//                                    R.string.cards_card_report_this_post
+//                                )
+//                            )
+//                        )
+//                    }
+//
+//                    override fun performAccessibilityAction(
+//                        host: View?,
+//                        action: Int,
+//                        args: Bundle?
+//                    ): Boolean {
+//                        when (action) {
+//                            R.id.action_card_like -> {
+//                                onClick(itemView.cards_card_like)
+//                                return true
+//                            }
+//                            R.id.action_card_comment -> {
+//                                onClick(itemView.cards_card_comment)
+//                                return true
+//                            }
+//                            R.id.action_card_favorite -> {
+//                                onClick(itemView.cards_card_favorite)
+//                                return true
+//                            }
+//                            R.id.action_card_share -> {
+//                                onClick(itemView.cards_card_share)
+//                                return true
+//                            }
+//                            R.id.action_card_archive,
+//                            R.id.action_card_remove,
+//                            R.id.action_card_report -> {
+//                                removeItem(position)
+//                                return true
+//                            }
+//                        }
+//                        return super.performAccessibilityAction(host, action, args)
+//                    }
+//                }
+//            )
         }
 
         private fun contentDescriptionForName(
