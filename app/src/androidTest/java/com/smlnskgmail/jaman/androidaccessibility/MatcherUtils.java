@@ -4,11 +4,25 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.SeekBar;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.test.espresso.UiController;
+import androidx.test.espresso.ViewAction;
+import androidx.test.espresso.matcher.BoundedMatcher;
+import androidx.test.espresso.matcher.ViewMatchers;
+
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
+import static androidx.test.espresso.core.internal.deps.guava.base.Preconditions.checkNotNull;
+import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
+import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static org.hamcrest.CoreMatchers.allOf;
+
 public class MatcherUtils {
-    public static Matcher<View> getTextInputLayoutEditText(int id) {
+
+    static Matcher<View> getTextInputLayoutEditText(int id) {
         return allOf(isDescendantOfA(withId(id)), isAssignableFrom(EditText.class));
     }
 
@@ -50,4 +64,5 @@ public class MatcherUtils {
             }
         };
     }
+
 }

@@ -3,8 +3,6 @@ package com.smlnskgmail.jaman.androidaccessibility.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.MotionEvent
-import android.view.View
 import androidx.annotation.NonNull
 import androidx.core.view.ViewCompat
 import com.github.mikephil.charting.charts.BarChart
@@ -23,7 +21,6 @@ import com.smlnskgmail.jaman.androidaccessibility.accessibility.ChartAccessibili
 import com.smlnskgmail.jaman.androidaccessibility.utils.AccessibilityUtils
 import kotlinx.android.synthetic.main.activity_charts.*
 import java.util.*
-import kotlin.math.round
 import kotlin.math.roundToInt
 
 class ChartsActivity : BaseActivity(), ChartAccessibilityHelper.DataFormatter {

@@ -1,32 +1,32 @@
 package com.smlnskgmail.jaman.androidaccessibility;
 
 import android.os.SystemClock;
-import android.support.test.filters.LargeTest;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
 import android.view.View;
 
-import com.linkedin.android.learning_android_accessibility.activities.TabLayoutActivity;
+import androidx.test.filters.LargeTest;
+import androidx.test.rule.ActivityTestRule;
+
+import com.smlnskgmail.jaman.androidaccessibility.activities.TabLayoutActivity;
 
 import org.hamcrest.Matcher;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.swipeLeft;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.isDescendantOfA;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.swipeLeft;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.Matchers.containsString;
 
-@RunWith(AndroidJUnit4.class)
 @LargeTest
 public class TabLayoutActivityTest {
+
     @Rule
     public ActivityTestRule<TabLayoutActivity> mActivityRule =
             new ActivityTestRule<>(TabLayoutActivity.class);
@@ -48,4 +48,5 @@ public class TabLayoutActivityTest {
         onView(allOf(withId(R.id.tab_layout_textview), isCompletelyDisplayed()))
                 .check(matches(withText(containsString("Learn more"))));
     }
+
 }

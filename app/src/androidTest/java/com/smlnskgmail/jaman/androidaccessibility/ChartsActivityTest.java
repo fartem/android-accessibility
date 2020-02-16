@@ -1,21 +1,18 @@
 package com.smlnskgmail.jaman.androidaccessibility;
 
-import android.support.test.filters.LargeTest;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
+import androidx.test.rule.ActivityTestRule;
 
-import com.linkedin.android.learning_android_accessibility.activities.ChartsActivity;
+import com.smlnskgmail.jaman.androidaccessibility.activities.ChartsActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
-@RunWith(AndroidJUnit4.class)
 @LargeTest
 public class ChartsActivityTest {
     @Rule
@@ -27,4 +24,5 @@ public class ChartsActivityTest {
         onView(withId(R.id.charts_line_chart)).check(matches(isDisplayed()));
         onView(withId(R.id.charts_bar_chart)).check(matches(isDisplayed()));
     }
+
 }
