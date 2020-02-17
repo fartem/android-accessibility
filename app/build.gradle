@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply from: 'detekt.gradle'
+apply from: 'cpd.gradle'
 
 android {
     compileSdkVersion 29

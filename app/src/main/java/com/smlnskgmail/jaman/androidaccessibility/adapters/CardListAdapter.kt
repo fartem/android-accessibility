@@ -15,10 +15,9 @@ import kotlinx.android.synthetic.main.card_list_item.view.*
 import java.util.*
 
 class CardListAdapter(
-    private val cardData: MutableList<CardItem>
+    private val cardData: MutableList<CardItem>,
+    private val clickListener: ItemClickListeners? = null
 ) : RecyclerView.Adapter<CardListAdapter.ViewHolder>() {
-
-    private var clickListeners: ItemClickListeners? = null
 
     init {
         setHasStableIds(true)
@@ -51,10 +50,6 @@ class CardListAdapter(
     fun removeItem(position: Int) {
         cardData.removeAt(position)
         notifyItemRemoved(position)
-    }
-
-    fun setClickListener(itemClickListeners: ItemClickListeners?) {
-        clickListeners = itemClickListeners
     }
 
     override fun getItemCount(): Int {
@@ -107,29 +102,26 @@ class CardListAdapter(
             itemView.cards_card_avatar.setImageResource(item.avatarId)
             itemView.cards_card_name.text = item.name
 
-            val name = item.name
-
             itemView.cards_card_more_options.contentDescription = contentDescriptionForName(
                 R.string.cards_card_more_options_button,
-                name
+                item.name
             )
 
             val commentDescription = contentDescriptionForName(
                 R.string.cards_card_comment_button,
-                name
+                item.name
             )
             itemView.cards_card_comment.contentDescription = commentDescription
 
             val shareDescription = contentDescriptionForName(
                 R.string.cards_card_share_button,
-                name
+                item.name
             )
             itemView.cards_card_share.contentDescription = shareDescription
 
-            val `when` = item.date.time
             val now = Calendar.getInstance().timeInMillis
             val time = DateUtils.getRelativeTimeSpanString(
-                `when`,
+                item.date.time,
                 now,
                 DateUtils.HOUR_IN_MILLIS
             )
@@ -141,61 +133,11 @@ class CardListAdapter(
             itemView.cards_card_share_text.text = item.shareText
             itemView.cards_card_image.setImageResource(item.imageId)
 
-            val likeDescription: String
-            if (item.isLiked) {
-                itemView.cards_card_like.setColorFilter(Color.BLUE)
-                itemView.cards_card_like.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        itemView.context,
-                        R.drawable.ic_thumb_up_24dp
-                    )
-                )
-                likeDescription = contentDescriptionForName(
-                    R.string.cards_card_unlike_button,
-                    name
-                )
-            } else {
-                itemView.cards_card_like.colorFilter = null
-                itemView.cards_card_like.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        itemView.context,
-                        R.drawable.ic_thumb_up_border_24dp
-                    )
-                )
-                likeDescription = contentDescriptionForName(
-                    R.string.cards_card_like_button,
-                    name
-                )
-            }
-            itemView.cards_card_like.contentDescription = likeDescription
 
-            val favoriteDescription: String
-            if (item.isFavorite) {
-                itemView.cards_card_favorite.setColorFilter(Color.RED)
-                itemView.cards_card_favorite.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        itemView.context,
-                        R.drawable.ic_favorite_24dp
-                    )
-                )
-                favoriteDescription = contentDescriptionForName(
-                    R.string.cards_card_unfavorite_button,
-                    name
-                )
-            } else {
-                itemView.cards_card_favorite.colorFilter = null
-                itemView.cards_card_favorite.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        itemView.context,
-                        R.drawable.ic_favorite_border_24dp
-                    )
-                )
-                favoriteDescription = contentDescriptionForName(
-                    R.string.cards_card_favorite_button,
-                    name
-                )
-            }
-            itemView.cards_card_favorite.contentDescription = favoriteDescription
+            itemView.cards_card_like.contentDescription = initLikeAction(item)
+
+
+            itemView.cards_card_favorite.contentDescription = initFavoriteAction(item)
 
 //            ViewCompat.setAccessibilityDelegate(
 //                itemView,
@@ -298,6 +240,70 @@ class CardListAdapter(
 //            )
         }
 
+        private fun initLikeAction(
+            item: CardItem
+        ): String {
+            val likeDescription: String
+            if (item.isLiked) {
+                itemView.cards_card_like.setColorFilter(Color.BLUE)
+                itemView.cards_card_like.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        itemView.context,
+                        R.drawable.ic_thumb_up_24dp
+                    )
+                )
+                likeDescription = contentDescriptionForName(
+                    R.string.cards_card_unlike_button,
+                    item.name
+                )
+            } else {
+                itemView.cards_card_like.colorFilter = null
+                itemView.cards_card_like.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        itemView.context,
+                        R.drawable.ic_thumb_up_border_24dp
+                    )
+                )
+                likeDescription = contentDescriptionForName(
+                    R.string.cards_card_like_button,
+                    item.name
+                )
+            }
+            return likeDescription
+        }
+
+        private fun initFavoriteAction(
+            item: CardItem
+        ): String {
+            val favoriteDescription: String
+            if (item.isFavorite) {
+                itemView.cards_card_favorite.setColorFilter(Color.RED)
+                itemView.cards_card_favorite.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        itemView.context,
+                        R.drawable.ic_favorite_24dp
+                    )
+                )
+                favoriteDescription = contentDescriptionForName(
+                    R.string.cards_card_unfavorite_button,
+                    item.name
+                )
+            } else {
+                itemView.cards_card_favorite.colorFilter = null
+                itemView.cards_card_favorite.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        itemView.context,
+                        R.drawable.ic_favorite_border_24dp
+                    )
+                )
+                favoriteDescription = contentDescriptionForName(
+                    R.string.cards_card_favorite_button,
+                    item.name
+                )
+            }
+            return favoriteDescription
+        }
+
         private fun contentDescriptionForName(
             descriptionResId: Int,
             name: String
@@ -310,21 +316,11 @@ class CardListAdapter(
         override fun onClick(view: View) {
             val position: Int = adapterPosition
             when (view.id) {
-                R.id.cards_card_like -> if (clickListeners != null) {
-                    clickListeners!!.onLikeClicked(view, position)
-                }
-                R.id.cards_card_comment -> if (clickListeners != null) {
-                    clickListeners!!.onCommentClicked(view, position)
-                }
-                R.id.cards_card_favorite -> if (clickListeners != null) {
-                    clickListeners!!.onFavoriteClicked(view, position)
-                }
-                R.id.cards_card_share -> if (clickListeners != null) {
-                    clickListeners!!.onShareClicked(view, position)
-                }
-                R.id.cards_card_more_options -> if (clickListeners != null) {
-                    clickListeners!!.onMoreOptionsClicked(view, position)
-                }
+                R.id.cards_card_like -> clickListener?.onLikeClicked(view, position)
+                R.id.cards_card_comment -> clickListener?.onCommentClicked(view, position)
+                R.id.cards_card_favorite -> clickListener?.onFavoriteClicked(view, position)
+                R.id.cards_card_share -> clickListener?.onShareClicked(view, position)
+                R.id.cards_card_more_options -> clickListener?.onMoreOptionsClicked(view, position)
             }
         }
 

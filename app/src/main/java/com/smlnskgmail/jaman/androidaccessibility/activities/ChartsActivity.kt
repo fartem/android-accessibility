@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.activity_charts.*
 import java.util.*
 import kotlin.math.roundToInt
 
+@SuppressWarnings("MagicNumber")
 class ChartsActivity : BaseActivity(), ChartAccessibilityHelper.DataFormatter {
 
     private val lineEntries = mutableListOf<Entry>()
@@ -81,6 +82,7 @@ class ChartsActivity : BaseActivity(), ChartAccessibilityHelper.DataFormatter {
         }
     }
 
+    @SuppressWarnings("SpreadOperator")
     private fun setDataForChart(
         @NonNull chart: BarLineChartBase<*>,
         @NonNull data: FloatArray

@@ -12,12 +12,13 @@ import java.util.*
 
 class ListFragment : BaseFragment(), ListAdapter.ItemClickListener {
 
-    var callback: ItemClickListener? = null
+    private var callback: ItemClickListener? = null
 
     interface ItemClickListener {
         fun onListItemClicked(view: View?, position: Int)
     }
 
+    @SuppressWarnings("SwallowedException")
     override fun onAttach(context: Context) {
         super.onAttach(context)
         callback = try {
@@ -29,7 +30,11 @@ class ListFragment : BaseFragment(), ListAdapter.ItemClickListener {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    @SuppressWarnings("MagicNumber")
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
         super.onViewCreated(view, savedInstanceState)
         val listItems: MutableList<String> = ArrayList()
         for (i in 0..19) {

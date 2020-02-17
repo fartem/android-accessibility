@@ -28,8 +28,7 @@ class CardsActivity : BaseActivity(), CardListAdapter.ItemClickListeners {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        cardsListAdapter = CardListAdapter(cardsList())
-        cardsListAdapter!!.setClickListener(this)
+        cardsListAdapter = CardListAdapter(cardsList(), this)
         cards_recyclerview.setHasFixedSize(true)
         cardsListLayoutManager = LinearLayoutManager(this)
         cards_recyclerview.layoutManager = cardsListLayoutManager

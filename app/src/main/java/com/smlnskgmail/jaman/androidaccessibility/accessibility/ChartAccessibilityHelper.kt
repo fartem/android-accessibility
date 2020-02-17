@@ -12,6 +12,7 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.Entry
 
+@SuppressWarnings("MagicNumber")
 class ChartAccessibilityHelper(
     private val chart: BarLineChartBase<*>,
     private val entries: List<Entry>

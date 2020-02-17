@@ -10,6 +10,7 @@ import android.view.View
 import android.view.accessibility.AccessibilityNodeInfo
 import com.smlnskgmail.jaman.androidaccessibility.utils.AccessibilityUtils
 
+@SuppressWarnings("MagicNumber")
 class SimpleCustomView : View {
 
     private val textSize: Float = AccessibilityUtils.spToPx(48f)

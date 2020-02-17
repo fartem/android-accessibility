@@ -9,6 +9,7 @@ class DetailFragment : BaseFragment() {
 
     private lateinit var animationListener: AnimationListener
 
+    @SuppressWarnings("SwallowedException")
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {

@@ -3,6 +3,7 @@ package com.smlnskgmail.jaman.androidaccessibility.utils
 import java.util.*
 import kotlin.math.roundToInt
 
+@SuppressWarnings("MagicNumber")
 object CommonUtils {
 
     fun getNearDate(): Date {
@@ -14,7 +15,10 @@ object CommonUtils {
         return calendar.time
     }
 
-    private fun randomBetween(start: Int, end: Int): Int {
+    private fun randomBetween(
+        start: Int,
+        end: Int
+    ): Int {
         return start + (Math.random() * (end - start)).roundToInt()
     }
 

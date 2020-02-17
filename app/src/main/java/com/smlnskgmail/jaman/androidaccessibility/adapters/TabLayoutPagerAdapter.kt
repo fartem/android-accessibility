@@ -18,10 +18,4 @@ class TabLayoutPagerAdapter(
         return data.size
     }
 
-    companion object {
-
-        const val count = 3
-
-    }
-
 }
