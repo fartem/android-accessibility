@@ -31,8 +31,9 @@
         android:layout_marginStart="@dimen/padding_l"
         android:layout_marginRight="@dimen/padding_l"
         android:layout_marginEnd="@dimen/padding_l"
-        android:contentDescription="@string/login_email_address"
         android:labelFor="@id/login_email_address_edit_text"
+        android:accessibilityHeading="true"
+        android:contentDescription="@string/login_email_address"
         app:layout_constraintTop_toBottomOf="@id/login_error_message"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -43,6 +44,7 @@
             android:id="@+id/login_email_address_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="@dimen/min_height"
             android:inputType="textEmailAddress"
             android:hint="@string/login_email_address" />
 
@@ -56,8 +58,8 @@
         android:layout_marginStart="@dimen/padding_l"
         android:layout_marginRight="@dimen/padding_l"
         android:layout_marginEnd="@dimen/padding_l"
-        android:contentDescription="@string/login_password"
         android:labelFor="@id/login_password_edit_text"
+        android:contentDescription="@string/login_password"
         app:layout_constraintTop_toBottomOf="@id/login_email_address"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -68,6 +70,7 @@
             android:id="@+id/login_password_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="@dimen/min_height"
             android:inputType="textPassword"
             android:hint="@string/login_password" />
 

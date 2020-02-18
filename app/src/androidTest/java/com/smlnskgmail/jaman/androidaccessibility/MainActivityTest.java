@@ -45,4 +45,5 @@ public class MainActivityTest {
                 .check(matches(isFocusable()))
                 .check(matches(isClickable()));
     }
+
 }
