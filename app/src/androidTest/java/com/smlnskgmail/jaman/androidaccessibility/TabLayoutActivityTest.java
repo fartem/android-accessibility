@@ -26,8 +26,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.Matchers.containsString;
 
-@SuppressLint("IgnoreWithoutReason")
-@Ignore
 @LargeTest
 public class TabLayoutActivityTest {
 
