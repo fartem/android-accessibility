@@ -1,5 +1,6 @@
 package com.smlnskgmail.jaman.androidaccessibility;
 
+import android.annotation.SuppressLint;
 import android.os.SystemClock;
 import android.view.View;
 
@@ -9,6 +10,7 @@ import androidx.test.rule.ActivityTestRule;
 import com.smlnskgmail.jaman.androidaccessibility.activities.TabLayoutActivity;
 
 import org.hamcrest.Matcher;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -24,6 +26,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.Matchers.containsString;
 
+@SuppressLint("IgnoreWithoutReason")
+@Ignore
 @LargeTest
 public class TabLayoutActivityTest {
 
