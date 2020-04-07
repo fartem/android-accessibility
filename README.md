@@ -8,7 +8,7 @@ Android App Development: Accessibility
 About
 -------------
 
-Completed "Android App Development: Accessibility" course.
+Completed ["Android App Development: Accessibility"](https://www.linkedin.com/learning/android-app-development-accessibility) course.
 
 Course
 -------------
