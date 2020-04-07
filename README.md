@@ -3,7 +3,7 @@
 Android App Development: Accessibility
 =============
 
-![Travis CI](https://img.shields.io/travis/fartem/android-accessibility)
+[![Travis CI](https://travis-ci.org/fartem/android-accessibility.svg?branch=master)](https://travis-ci.org/fartem/android-accessibility)
 
 About
 -------------
