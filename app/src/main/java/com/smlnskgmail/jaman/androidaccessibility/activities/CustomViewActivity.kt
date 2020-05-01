@@ -13,7 +13,10 @@ class CustomViewActivity : BaseActivity() {
     companion object {
 
         fun newIntent(context: Context?): Intent {
-            return Intent(context, CustomViewActivity::class.java)
+            return Intent(
+                context,
+                CustomViewActivity::class.java
+            )
         }
 
     }

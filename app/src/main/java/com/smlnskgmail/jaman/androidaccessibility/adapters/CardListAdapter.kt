@@ -62,11 +62,26 @@ class CardListAdapter(
 
     interface ItemClickListeners {
 
-        fun onLikeClicked(view: View?, position: Int)
-        fun onCommentClicked(view: View?, position: Int)
-        fun onFavoriteClicked(view: View?, position: Int)
-        fun onShareClicked(view: View?, position: Int)
-        fun onMoreOptionsClicked(view: View?, position: Int)
+        fun onLikeClicked(
+            view: View?,
+            position: Int
+        )
+        fun onCommentClicked(
+            view: View?,
+            position: Int
+        )
+        fun onFavoriteClicked(
+            view: View?,
+            position: Int
+        )
+        fun onShareClicked(
+            view: View?,
+            position: Int
+        )
+        fun onMoreOptionsClicked(
+            view: View?,
+            position: Int
+        )
 
     }
 
@@ -99,7 +114,9 @@ class CardListAdapter(
 
         fun bind(position: Int) {
             val item: CardItem = getItem(position)
-            itemView.cards_card_avatar.setImageResource(item.avatarId)
+            itemView.cards_card_avatar.setImageResource(
+                item.avatarId
+            )
             itemView.cards_card_name.text = item.name
 
             itemView.cards_card_more_options.contentDescription = contentDescriptionForName(
@@ -131,7 +148,9 @@ class CardListAdapter(
                 item.country
             )
             itemView.cards_card_share_text.text = item.shareText
-            itemView.cards_card_image.setImageResource(item.imageId)
+            itemView.cards_card_image.setImageResource(
+                item.imageId
+            )
 
 
             itemView.cards_card_like.contentDescription = initLikeAction(item)
@@ -245,7 +264,9 @@ class CardListAdapter(
         ): String {
             val likeDescription: String
             if (item.isLiked) {
-                itemView.cards_card_like.setColorFilter(Color.BLUE)
+                itemView.cards_card_like.setColorFilter(
+                    Color.BLUE
+                )
                 itemView.cards_card_like.setImageDrawable(
                     ContextCompat.getDrawable(
                         itemView.context,
@@ -277,7 +298,9 @@ class CardListAdapter(
         ): String {
             val favoriteDescription: String
             if (item.isFavorite) {
-                itemView.cards_card_favorite.setColorFilter(Color.RED)
+                itemView.cards_card_favorite.setColorFilter(
+                    Color.RED
+                )
                 itemView.cards_card_favorite.setImageDrawable(
                     ContextCompat.getDrawable(
                         itemView.context,

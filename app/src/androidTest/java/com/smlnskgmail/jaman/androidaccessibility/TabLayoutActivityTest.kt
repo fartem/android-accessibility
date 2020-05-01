@@ -46,7 +46,9 @@ class TabLayoutActivityTest {
         ).check(
             matches(
                 withText(
-                    containsString("Learn more")
+                    containsString(
+                        "Learn more"
+                    )
                 )
             )
         )

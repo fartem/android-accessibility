@@ -23,12 +23,15 @@ import kotlinx.android.synthetic.main.activity_cards.*
 
 class CardsActivity : BaseActivity(), CardListAdapter.ItemClickListeners {
 
-    private var cardsListAdapter: CardListAdapter? = null
-    private var cardsListLayoutManager: RecyclerView.LayoutManager? = null
+    private lateinit var cardsListAdapter: CardListAdapter
+    private lateinit var cardsListLayoutManager: RecyclerView.LayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        cardsListAdapter = CardListAdapter(cardsList(), this)
+        cardsListAdapter = CardListAdapter(
+            cardsList(),
+            this
+        )
         cards_recyclerview.setHasFixedSize(true)
         cardsListLayoutManager = LinearLayoutManager(this)
         cards_recyclerview.layoutManager = cardsListLayoutManager
@@ -38,8 +41,7 @@ class CardsActivity : BaseActivity(), CardListAdapter.ItemClickListeners {
     }
 
     private fun cardsList(): MutableList<CardItem> {
-        val cardsList = arrayListOf<CardItem>()
-        cardsList.add(
+        return arrayListOf(
             CardItem(
                 avatarId = R.drawable.avatar_jane_doe,
                 name = "Jane Doe",
@@ -47,9 +49,7 @@ class CardsActivity : BaseActivity(), CardListAdapter.ItemClickListeners {
                 country = "Brazil",
                 shareText = "Beautiful place!",
                 imageId = R.drawable.iguazu_falls
-            )
-        )
-        cardsList.add(
+            ),
             CardItem(
                 avatarId = R.drawable.avatar_john_doe,
                 name = "John Doe",
@@ -57,9 +57,7 @@ class CardsActivity : BaseActivity(), CardListAdapter.ItemClickListeners {
                 country = "United States",
                 shareText = "New adventures last weekend and possibly one of the most beautiful places I've been!",
                 imageId = R.drawable.niagara_falls
-            )
-        )
-        cardsList.add(
+            ),
             CardItem(
                 avatarId = R.drawable.avatar_rebecca_williams,
                 name = "Rebecca Williams",
@@ -69,19 +67,26 @@ class CardsActivity : BaseActivity(), CardListAdapter.ItemClickListeners {
                 imageId = R.drawable.yosemite
             )
         )
-        return cardsList
     }
 
-    override fun onLikeClicked(view: View?, position: Int) {
-        val item: CardItem = cardsListAdapter!!.getItem(position)
+    override fun onLikeClicked(
+        view: View?,
+        position: Int
+    ) {
+        val item: CardItem = cardsListAdapter.getItem(
+            position
+        )
         item.isLiked = !item.isLiked
-        cardsListAdapter!!.notifyDataSetChanged()
+        cardsListAdapter.notifyDataSetChanged()
         view!!.sendAccessibilityEvent(
             AccessibilityEventCompat.TYPE_VIEW_ACCESSIBILITY_FOCUSED
         )
     }
 
-    override fun onCommentClicked(view: View?, position: Int) {
+    override fun onCommentClicked(
+        view: View?,
+        position: Int
+    ) {
         Toast.makeText(
             this,
             "Comment is disabled!",
@@ -89,20 +94,33 @@ class CardsActivity : BaseActivity(), CardListAdapter.ItemClickListeners {
         ).show()
     }
 
-    override fun onFavoriteClicked(view: View?, position: Int) {
-        val item: CardItem = cardsListAdapter!!.getItem(position)
+    override fun onFavoriteClicked(
+        view: View?,
+        position: Int
+    ) {
+        val item: CardItem = cardsListAdapter.getItem(
+            position
+        )
         item.isFavorite = !item.isFavorite
-        cardsListAdapter!!.notifyDataSetChanged()
+        cardsListAdapter.notifyDataSetChanged()
         view!!.sendAccessibilityEvent(
             AccessibilityEventCompat.TYPE_VIEW_ACCESSIBILITY_FOCUSED
         )
     }
 
-    override fun onShareClicked(view: View?, position: Int) {
-        val shareBody: String = cardsListAdapter!!.getItem(position).shareText
+    override fun onShareClicked(
+        view: View?,
+        position: Int
+    ) {
+        val shareBody: String = cardsListAdapter.getItem(
+            position
+        ).shareText
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.type = "text/plain"
-        shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
+        shareIntent.putExtra(
+            Intent.EXTRA_TEXT,
+            shareBody
+        )
         val chooserTitle = resources.getString(R.string.cards_share_via)
         startActivity(
             Intent.createChooser(
@@ -112,14 +130,17 @@ class CardsActivity : BaseActivity(), CardListAdapter.ItemClickListeners {
         )
     }
 
-    override fun onMoreOptionsClicked(view: View?, position: Int) {
+    override fun onMoreOptionsClicked(
+        view: View?,
+        position: Int
+    ) {
         val popup = PopupMenu(this, view!!)
         popup.menuInflater.inflate(
             R.menu.cards_card_more_options_menu,
             popup.menu
         )
         popup.setOnMenuItemClickListener {
-            cardsListAdapter!!.removeItem(position)
+            cardsListAdapter.removeItem(position)
             true
         }
         popup.show()
@@ -155,7 +176,8 @@ class CardsActivity : BaseActivity(), CardListAdapter.ItemClickListeners {
                     swipeDir: Int
                 ) {
                     val position: Int = viewHolder.adapterPosition
-                    val adapter: CardListAdapter = cards_recyclerview.adapter as CardListAdapter
+                    val adapter: CardListAdapter
+                            = cards_recyclerview.adapter as CardListAdapter
                     adapter.removeItem(position)
                 }
 
@@ -190,7 +212,12 @@ class CardsActivity : BaseActivity(), CardListAdapter.ItemClickListeners {
                     val right = itemView.right
                     val top = itemView.top + (itemHeight - intrinsicHeight) / 2
                     val bottom = top + intrinsicHeight
-                    archiveIcon!!.setBounds(left, top, right, bottom)
+                    archiveIcon!!.setBounds(
+                        left,
+                        top,
+                        right,
+                        bottom
+                    )
                     archiveIcon!!.draw(canvas)
                     super.onChildDraw(
                         canvas,
@@ -207,7 +234,9 @@ class CardsActivity : BaseActivity(), CardListAdapter.ItemClickListeners {
         val itemTouchHelper = ItemTouchHelper(
             simpleItemTouchCallback
         )
-        itemTouchHelper.attachToRecyclerView(cards_recyclerview)
+        itemTouchHelper.attachToRecyclerView(
+            cards_recyclerview
+        )
     }
 
     override fun getLayoutResId(): Int {
@@ -217,7 +246,10 @@ class CardsActivity : BaseActivity(), CardListAdapter.ItemClickListeners {
     companion object {
 
         fun newIntent(context: Context): Intent {
-            return Intent(context, CardsActivity::class.java)
+            return Intent(
+                context,
+                CardsActivity::class.java
+            )
         }
 
     }

@@ -28,14 +28,18 @@ class SingleActivityTest {
             .perform(
                 scrollTo<RecyclerView.ViewHolder>(
                     hasDescendant(
-                        withText("Option 15")
+                        withText(
+                            "Option 15"
+                        )
                     )
                 )
             )
             .perform(
                 actionOnItem<RecyclerView.ViewHolder>(
                     hasDescendant(
-                        withText("Option 15")
+                        withText(
+                            "Option 15"
+                        )
                     ),
                     click()
                 )

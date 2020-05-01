@@ -26,7 +26,10 @@ class SingleActivity
             .commit()
     }
 
-    override fun onListItemClicked(view: View?, position: Int) {
+    override fun onListItemClicked(
+        view: View?,
+        position: Int
+    ) {
         supportFragmentManager
             .beginTransaction()
             .setCustomAnimations(
@@ -55,7 +58,10 @@ class SingleActivity
     companion object {
 
         fun newIntent(context: Context?): Intent {
-            return Intent(context, SingleActivity::class.java)
+            return Intent(
+                context,
+                SingleActivity::class.java
+            )
         }
 
     }

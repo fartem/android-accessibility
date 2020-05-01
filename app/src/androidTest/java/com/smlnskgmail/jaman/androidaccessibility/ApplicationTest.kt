@@ -21,12 +21,14 @@ class ApplicationTest {
     }
 
     companion object {
+
         @BeforeClass
         fun enableAccessibilityChecks() {
             AccessibilityChecks
                 .enable()
                 .setRunChecksFromRootView(true)
         }
+
     }
 
 }

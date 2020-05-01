@@ -15,18 +15,11 @@ import com.github.mikephil.charting.data.Entry
 @SuppressWarnings("MagicNumber")
 class ChartAccessibilityHelper(
     private val chart: BarLineChartBase<*>,
-    private val entries: List<Entry>
+    private val entries: List<Entry>,
+    private val dataFormatter: DataFormatter
 ) : ExploreByTouchHelper(chart) {
 
     private val tempRect = Rect()
-
-    private var dataFormatter: DataFormatter? = null
-
-    fun dataFormatter(
-        dataFormatter: DataFormatter
-    ) {
-        this.dataFormatter = dataFormatter
-    }
 
     override fun getVirtualViewAt(
         x: Float,
@@ -62,18 +55,18 @@ class ChartAccessibilityHelper(
         node: AccessibilityNodeInfoCompat
     ) {
         val entry = entries[virtualViewId]
-        if (dataFormatter != null) {
-            node.text = dataFormatter!!.description(
-                chart,
-                entries,
-                entry
-            )
-        }
+        node.text = dataFormatter.description(
+            chart,
+            entries,
+            entry
+        )
 
         val bounds = tempRect
 
         if (chart is BarChart) {
-            val barBounds = chart.getBarBounds(entry as BarEntry)
+            val barBounds = chart.getBarBounds(
+                entry as BarEntry
+            )
             barBounds.round(bounds)
             node.getBoundsInScreen(bounds)
         } else {

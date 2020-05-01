@@ -10,37 +10,51 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         main_login_button.setOnClickListener {
             startActivity(
-                LoginActivity.newIntent(this)
+                LoginActivity.newIntent(
+                    this
+                )
             )
         }
         main_settings_button.setOnClickListener {
             startActivity(
-                SettingsActivity.newIntent(this)
+                SettingsActivity.newIntent(
+                    this
+                )
             )
         }
         main_tablayout_button.setOnClickListener {
             startActivity(
-                TabLayoutActivity.newIntent(this)
+                TabLayoutActivity.newIntent(
+                    this
+                )
             )
         }
         main_single_button.setOnClickListener {
             startActivity(
-                SingleActivity.newIntent(this)
+                SingleActivity.newIntent(
+                    this
+                )
             )
         }
         main_cards_button.setOnClickListener {
             startActivity(
-                CardsActivity.newIntent(this)
+                CardsActivity.newIntent(
+                    this
+                )
             )
         }
         main_custom_button.setOnClickListener {
             startActivity(
-                CustomViewActivity.newIntent(this)
+                CustomViewActivity.newIntent(
+                    this
+                )
             )
         }
         main_charts_button.setOnClickListener {
             startActivity(
-                ChartsActivity.newIntent(this)
+                ChartsActivity.newIntent(
+                    this
+                )
             )
         }
     }

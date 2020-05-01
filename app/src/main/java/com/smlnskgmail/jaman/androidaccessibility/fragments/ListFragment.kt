@@ -14,10 +14,6 @@ class ListFragment : BaseFragment(), ListAdapter.ItemClickListener {
 
     private var callback: ItemClickListener? = null
 
-    interface ItemClickListener {
-        fun onListItemClicked(view: View?, position: Int)
-    }
-
     @SuppressWarnings("SwallowedException")
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -53,11 +49,19 @@ class ListFragment : BaseFragment(), ListAdapter.ItemClickListener {
             single_list_recyclerview.context,
             layoutManager.orientation
         )
-        single_list_recyclerview.addItemDecoration(dividerItemDecoration)
+        single_list_recyclerview.addItemDecoration(
+            dividerItemDecoration
+        )
     }
 
-    override fun onItemClicked(view: View?, position: Int) {
-        callback!!.onListItemClicked(view, position)
+    override fun onItemClicked(
+        view: View?,
+        position: Int
+    ) {
+        callback!!.onListItemClicked(
+            view,
+            position
+        )
     }
 
     override fun getLayoutResId(): Int {
@@ -69,6 +73,15 @@ class ListFragment : BaseFragment(), ListAdapter.ItemClickListener {
         fun newInstance(): ListFragment {
             return ListFragment()
         }
+
+    }
+
+    interface ItemClickListener {
+
+        fun onListItemClicked(
+            view: View?,
+            position: Int
+        )
 
     }
 

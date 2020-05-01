@@ -26,7 +26,10 @@ class DetailFragment : BaseFragment() {
         enter: Boolean,
         nextAnim: Int
     ): Animation? {
-        val animation = AnimationUtils.loadAnimation(activity, nextAnim)
+        val animation = AnimationUtils.loadAnimation(
+            activity,
+            nextAnim
+        )
         animation.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationRepeat(animation: Animation?) {
                 // NO-OP

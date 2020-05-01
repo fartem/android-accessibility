@@ -13,7 +13,11 @@ abstract class BaseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(getLayoutResId(), container, false)
+        return inflater.inflate(
+            getLayoutResId(),
+            container,
+            false
+        )
     }
 
     abstract fun getLayoutResId(): Int

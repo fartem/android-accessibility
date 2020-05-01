@@ -11,7 +11,9 @@ class TabLayoutPagerAdapter(
 ) : FragmentStatePagerAdapter(fragmentManager!!) {
 
     override fun getItem(position: Int): Fragment {
-        return TabLayoutFragment.newInstance(data[position])
+        return TabLayoutFragment.newInstance(
+            data[position]
+        )
     }
 
     override fun getCount(): Int {

@@ -39,7 +39,12 @@ class ListAdapter(
     }
 
     interface ItemClickListener {
-        fun onItemClicked(view: View?, position: Int)
+
+        fun onItemClicked(
+            view: View?,
+            position: Int
+        )
+
     }
 
     inner class ViewHolder(
@@ -59,7 +64,10 @@ class ListAdapter(
                 return
             }
             val position = adapterPosition
-            clickListener!!.onItemClicked(view, position)
+            clickListener!!.onItemClicked(
+                view,
+                position
+            )
         }
 
     }

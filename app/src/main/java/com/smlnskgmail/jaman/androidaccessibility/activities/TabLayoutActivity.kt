@@ -18,9 +18,13 @@ class TabLayoutActivity : BaseActivity() {
             )
         )
         tab_layout_view_pager.adapter = viewPagerAdapter
-        tab_layout_tabs.setupWithViewPager(tab_layout_view_pager)
+        tab_layout_tabs.setupWithViewPager(
+            tab_layout_view_pager
+        )
 
-        val tabNames = resources.getStringArray(R.array.tab_layout_tabs)
+        val tabNames = resources.getStringArray(
+            R.array.tab_layout_tabs
+        )
         for (i in 0 until tab_layout_tabs.tabCount) {
             val tab = tab_layout_tabs.getTabAt(i)
             if (tab != null && tabNames[i] != null) {
@@ -41,7 +45,10 @@ class TabLayoutActivity : BaseActivity() {
     companion object {
 
         fun newIntent(context: Context?): Intent {
-            return Intent(context, TabLayoutActivity::class.java)
+            return Intent(
+                context,
+                TabLayoutActivity::class.java
+            )
         }
 
     }

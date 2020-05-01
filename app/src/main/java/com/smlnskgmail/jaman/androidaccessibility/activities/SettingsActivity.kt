@@ -29,7 +29,10 @@ class SettingsActivity : BaseActivity() {
     companion object {
 
         fun newIntent(context: Context?): Intent {
-            return Intent(context, SettingsActivity::class.java)
+            return Intent(
+                context,
+                SettingsActivity::class.java
+            )
         }
 
     }

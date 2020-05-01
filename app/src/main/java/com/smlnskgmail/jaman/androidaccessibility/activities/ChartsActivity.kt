@@ -56,9 +56,9 @@ class ChartsActivity : BaseActivity(), ChartAccessibilityHelper.DataFormatter {
 
         lineChartHelper = ChartAccessibilityHelper(
             charts_line_chart,
-            lineEntries
+            lineEntries,
+            this
         )
-        lineChartHelper.dataFormatter(this)
         ViewCompat.setAccessibilityDelegate(
             charts_line_chart,
             lineChartHelper
@@ -66,19 +66,23 @@ class ChartsActivity : BaseActivity(), ChartAccessibilityHelper.DataFormatter {
 
         barChartHelper = ChartAccessibilityHelper(
             charts_bar_chart,
-            barEntries
+            barEntries,
+            this
         )
-        barChartHelper.dataFormatter(this)
         ViewCompat.setAccessibilityDelegate(
             charts_bar_chart,
             barChartHelper
         )
 
         charts_line_chart.setOnHoverListener { _, event ->
-            lineChartHelper.dispatchHoverEvent(event!!)
+            lineChartHelper.dispatchHoverEvent(
+                event!!
+            )
         }
         charts_bar_chart.setOnHoverListener { _, event ->
-            barChartHelper.dispatchHoverEvent(event!!)
+            barChartHelper.dispatchHoverEvent(
+                event!!
+            )
         }
     }
 
@@ -100,15 +104,22 @@ class ChartsActivity : BaseActivity(), ChartAccessibilityHelper.DataFormatter {
                 lineEntries,
                 EntryXComparator()
             )
-            val lineDataSet = LineDataSet(lineEntries, "DataSet")
-            lineDataSet.setColors(*ColorTemplate.MATERIAL_COLORS)
+            val lineDataSet = LineDataSet(
+                lineEntries,
+                "DataSet"
+            )
+            lineDataSet.setColors(
+                *ColorTemplate.MATERIAL_COLORS
+            )
 
             val lineDataSets = mutableListOf<ILineDataSet>()
             lineDataSets.add(lineDataSet)
 
             val lineData = LineData(lineDataSets)
             lineData.setValueTextSize(
-                AccessibilityUtils.getScaleIndependentPixels(13f)
+                AccessibilityUtils.getScaleIndependentPixels(
+                    13f
+                )
             )
             chart.data = lineData
         } else if (chart is BarChart) {
@@ -121,15 +132,22 @@ class ChartsActivity : BaseActivity(), ChartAccessibilityHelper.DataFormatter {
                 )
             }
 
-            val barDataSet = BarDataSet(barEntries, "DataSet")
-            barDataSet.setColors(*ColorTemplate.MATERIAL_COLORS)
+            val barDataSet = BarDataSet(
+                barEntries,
+                "DataSet"
+            )
+            barDataSet.setColors(
+                *ColorTemplate.MATERIAL_COLORS
+            )
 
             val barDataSets = mutableListOf<IBarDataSet>()
             barDataSets.add(barDataSet)
 
             val barData = BarData(barDataSets)
             barData.setValueTextSize(
-                AccessibilityUtils.getScaleIndependentPixels(13f)
+                AccessibilityUtils.getScaleIndependentPixels(
+                    13f
+                )
             )
             chart.data = barData
         }
@@ -163,7 +181,10 @@ class ChartsActivity : BaseActivity(), ChartAccessibilityHelper.DataFormatter {
     companion object {
 
         fun newIntent(context: Context?): Intent {
-            return Intent(context, ChartsActivity::class.java)
+            return Intent(
+                context,
+                ChartsActivity::class.java
+            )
         }
 
         private val valueFormatterForMonth: IAxisValueFormatter
@@ -191,8 +212,8 @@ class ChartsActivity : BaseActivity(), ChartAccessibilityHelper.DataFormatter {
         }
 
         private fun configureChart(
-            @NonNull chart: BarLineChartBase<*>,
-            @NonNull xAxisValueFormatter: IAxisValueFormatter
+            chart: BarLineChartBase<*>,
+            xAxisValueFormatter: IAxisValueFormatter
         ) {
             chart.setScaleEnabled(false)
             chart.setDrawGridBackground(false)

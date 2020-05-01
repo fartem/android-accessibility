@@ -3,7 +3,6 @@ package com.smlnskgmail.jaman.androidaccessibility.models
 import java.util.*
 
 data class CardItem(
-
     var avatarId: Int = -1,
     var name: String = "",
     var date: Date = Date(),
@@ -12,5 +11,4 @@ data class CardItem(
     var imageId: Int = -1,
     var isLiked: Boolean = false,
     var isFavorite: Boolean  = false
-
 )
