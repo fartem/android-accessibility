@@ -2,7 +2,7 @@
 
 # Android App Development: Accessibility
 
-[![Travis CI](https://travis-ci.org/fartem/android-accessibility.svg?branch=master)](https://travis-ci.org/fartem/android-accessibility)
+[![GitHubActions](https://github.com/fartem/android-accessibility/workflows/Build/badge.svg)](https://github.com/fartem/android-accessibility/actions?query=workflow%3ABuild)
 
 ## About
 
